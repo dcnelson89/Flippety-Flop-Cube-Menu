@@ -1,0 +1,240 @@
+--------------------------------------------------------------
+#                                                            #
+#               CSS Accordion for MONO v1                    #
+#                                                            #
+#     Example: http://www.trentdirectfurniture.co.uk/faq     #
+#                                                            #
+--------------------------------------------------------------
+
+#############################################
+#                                           #
+#                 HTML Module               #
+#                                           #
+#############################################
+
+<div id="sticky-anchor"></div>
+<div id="sticky" class="navouter">
+  <nav>	
+	<div class="nav-wrap">
+
+<!-- HOME NAV ITEM WITH ICON START -->
+
+  <a href="/home" target="" title="Home">
+		<div class="navhome cube">
+			<div class="flippety">
+				<h6><i class="fa fa-home" aria-label="Home" aria-hidden="true"></i></h6>
+			</div>
+			<div class="flop">
+				<h6>Home</h6>
+			</div>
+		  </div>
+  </a>
+  
+<!-- HOME NAV ITEM END -->
+
+<!-- NORMAL NAV ITEM START - COPY PASTE THIS FOR MORE MENU ITEMS -->
+
+  <a href="/PAGE-URL" target="" title="PAGE TITLE">
+		<div class="cube">
+			<div class="flippety">
+				<h6>PAGE TITLE</h6>
+			</div>
+			<div class="flop">
+			  <h6>PAGE TITLE</h6>
+			</div>
+		</div>
+  </a>
+
+<!-- NORMAL NAV ITEM END -->
+
+
+
+</div> <!--end nav-wrap-->
+</nav>
+</div> <!--end nav-outer-->
+
+
+
+#############################################
+#                                           #
+#        Global Styling > Custom CSS        #
+#                                           #
+#############################################
+
+
+
+
+.cube {
+  /*width: 180px;*/
+    height: 50px;
+  text-align: center;
+    line-height: 45px;
+
+/* Change the Font Size Here */
+
+    font-size:20px;
+
+  float:left;
+  -webkit-transition: -webkit-transform .33s;
+  transition: transform .33s; 
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+/* Front Facing Colours */
+
+.flippety {
+  background: #20BAB8;
+  color: #FFF;
+}
+
+/* Back Facing Colours */
+
+.flop {
+  background: #CAF7F6;
+  border: 1px solid rgba(4, 4, 4, 0.2);
+  color: #20BAB8;
+  font-weight: bold;
+}
+
+/* Sticky Nav Bar Colours */
+
+#sticky.stick {
+    background: #20bab8;
+}
+
+.nav-wrap {
+display:inline-flex;
+}
+
+nav {
+  line-height:0;
+}
+
+@media only screen and (max-width: 900px){
+ nav .cube h6{font-size:16px;}
+ nav .cube .flippety, nav .cube .flop h6 {
+  padding-left:15px;
+  padding-right:15px;}
+}
+
+
+.flippety {
+	transition: all 0.4s;
+	-webkit-box-shadow: 0 5px 10px rgba(105, 108, 109, .3), 0 0 3px 5px rgba(208, 223, 226, .4) inset;
+	box-shadow: 0 5px 10px rgba(105, 108, 109, .3), 0 0 3px 5px rgba(208, 223, 226, .4) inset;
+	height: 50px;
+}
+
+.flop {
+	transition: all 0.4s;
+	-webkit-box-shadow: 0 5px 10px rgba(105, 108, 109, .3), 0 0 3px 5px rgba(208, 223, 226, .4) inset;
+	box-shadow: 0 5px 10px rgba(105, 108, 109, .3), 0 0 3px 5px rgba(208, 223, 226, .4) inset;
+	height: 50px;
+}
+
+.flippety {
+	-webkit-transform: translateZ(25px);
+	transform: translateZ(25px);
+}
+
+.flop {
+	-webkit-transform: rotateX(-90deg) translateZ(-25px);
+	transform: rotateX(-90deg) translateZ(-25px);
+}
+
+.cube:hover {
+	-webkit-transform: rotateX(89deg);
+	transform: rotateX(89deg); /* Text bleed at 90º */
+}
+
+.navhome.cube {
+  width:80px;
+}
+
+.flippety, .flop h6 {
+  padding-left:25px;
+  padding-right:25px}
+
+.navhome .flop h6 {
+padding-left:5px;
+padding-right:5px
+}
+
+#sticky.stick {
+    margin-top: 0 !important;
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    border-radius: 0 0 0.5em 0.5em;
+    width: 100%;
+    background: #20bab8;
+}
+
+.centered {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.shrink {
+  line-height:30px;
+  height:30px;
+  transition: all 0.4s;
+}
+
+
+
+
+#############################################
+#                                           #
+#  Settings > Global HTML > HTML HEAD Tags  #
+#                                           #
+#############################################
+
+
+
+
+<script src="https://use.fontawesome.com/23e2cd698a.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script type='text/javascript'>//<![CDATA[
+
+function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var div_top = $('#sticky-anchor').offset().top;
+    if (window_top > div_top) {
+        $('#sticky').addClass('stick centered');
+	  	$('.cube, .flippety, .flop').addClass('shrink');
+        $('#sticky-anchor').height($('#sticky').outerHeight());
+    } else {
+        $('#sticky').removeClass('stick centered');
+	  	$('.cube, .flippety, .flop').removeClass('shrink');
+        $('#sticky-anchor').height(0);
+    }
+}
+
+$(function() {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+});
+
+var dir = 1;
+var MIN_TOP = 200;
+var MAX_TOP = 350;
+
+function autoscroll() {
+    var window_top = $(window).scrollTop() + dir;
+    if (window_top >= MAX_TOP) {
+        window_top = MAX_TOP;
+        dir = -1;
+    } else if (window_top <= MIN_TOP) {
+        window_top = MIN_TOP;
+        dir = 1;
+    }
+    $(window).scrollTop(window_top);
+    window.setTimeout(autoscroll, 100);
+}
+
+//]]> 
+
+</script>
