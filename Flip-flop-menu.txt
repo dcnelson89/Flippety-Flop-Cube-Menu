@@ -2,8 +2,6 @@
 #                                                            #
 #               CSS Accordion for MONO v1                    #
 #                                                            #
-#     Example: http://www.trentdirectfurniture.co.uk/faq     #
-#                                                            #
 --------------------------------------------------------------
 
 #############################################
